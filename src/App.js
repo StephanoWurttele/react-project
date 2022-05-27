@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment, useState, useEffect } from 'react'
+import { Header } from './components/Header'
+import { Body } from './components/Body'
+import { Footer } from './components/Footer'
+const USERS = "retoLuiseUsuarios"
+const USER = "retoLuiseUsuario"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export function App() {
+    const [usuarios, setUsuarios] = useState({})
+    const [user, setUser] = useState()
+    console.log(usuarios)
+
+    useEffect(() => {
+        const storedUsuarios = JSON.parse(localStorage.getItem(USERS))
+        const storedUser = JSON.parse(localStorage.getItem(USER))
+        if(storedUsuarios){
+            setUsuarios(storedUsuarios)
+            if(storedUser)
+                setUser(storedUser)
+        }
+    }, [])
+
+    useEffect(() => {
+        if(usuarios)
+            localStorage.setItem(USERS, JSON.stringify(usuarios))
+        if(user)
+            localStorage.setItem(USER, JSON.stringify(user))
+    }, [user, usuarios])
+
+    const logout = () => {
+        setUser(null)
+        localStorage.removeItem(USER)
+    }
+
+    return (
+        <Fragment>
+            <Header usuario={user} setUser={setUser} usuarios={usuarios} setUsuarios={setUsuarios}/>
+            <Body usuario={user}/>
+            {user && <Footer logout={logout}/>}
+        </Fragment>
+    )
 }
-
-export default App;
