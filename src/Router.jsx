@@ -3,7 +3,7 @@ import {Route, Routes, BrowserRouter} from "react-router-dom"
 import {About} from "./views/About"
 import {Error} from "./views/Error"
 import {LandingPage} from "./views/LandingPage"
-import {User} from "./views/User"
+import {UserPage} from "./components/User/UserPage"
 import { NavBar } from './components/NavBar'
 
 export function Router() {
@@ -13,8 +13,9 @@ export function Router() {
                 <Route path="/" element={<NavBar/>}>
                     <Route index element={<LandingPage/>}/>
                     <Route path="/about" element={<About/>}/>
+                    <Route path="/user/:username" element={<UserPage/>}/>
                 </Route>
-                <Route path="/error" element={<Error/>}/>
+                <Route path="*" element={<Error errorNo={404}/>}/>
             </Routes>
         </BrowserRouter>
     )

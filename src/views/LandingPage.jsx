@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import { Header } from '../components/Header'
-import { Body } from '../components/Body'
+import { UserPage } from '../components/User/UserPage'
 import { Footer } from '../components/Footer'
 
 const USERS = "retoLuiseUsuarios"
@@ -36,7 +36,7 @@ export function LandingPage() {
     return (
         <Fragment>
             <Header usuario={user} setUser={setUser} usuarios={usuarios} setUsuarios={setUsuarios}/>
-            <Body usuario={user}/>
+            <UserPage usuario={user}/>
             {user && <Footer logout={logout}/>}
         </Fragment>
     )

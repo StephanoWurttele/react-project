@@ -1,19 +1,14 @@
 import React, { Fragment, useState, useEffect } from 'react'
-import { Bio } from './User/Bio/Bio'
-import { NewBio } from './User/Bio/NewBio'
+import { useParams } from 'react-router-dom'
+import { Bio } from './Bio/Bio'
+import { NewBio } from './Bio/NewBio'
 
 const BIO = "retoLuiseBios"
 
-export function Body({usuario}) {
-    // displayEdit = () => {
-    //     var x = document.getElementById("myDIV");
-    //     if (x.style.display === "none") {
-    //       x.style.display = "block";
-    //     } else {
-    //       x.style.display = "none";
-    //     }
-    //   }
+export function UserPage({usuario}) {
     const [bios, setBios] = useState({})
+    const params = useParams()
+    const userNameParams = params.username
     const updateBio = (content) => {
         // if(usuario in bios)
         let newBios = {...bios}
@@ -41,6 +36,7 @@ export function Body({usuario}) {
         const bio = bios[usuario.username]
         return (
             <Fragment>
+                <h1>Infrmación de {userNameParams}</h1>
                 <Bio bio={bio}/>
                 <NewBio currentBio={bio} submitBio={updateBio}/>
             </Fragment>

@@ -14,6 +14,10 @@ export function NavBar() {
                 <li>
                     <Link to="/error">To error</Link>
                 </li>
+                <li>
+                    <NavLink to="/user/asd" style={({ isActive }) => isActive ? {color: 'red'} : {color: 'blue'}} activeclassname="active">To user info</NavLink>
+                </li>
+                
             </ul>
             <Outlet/>
         </Fragment>
